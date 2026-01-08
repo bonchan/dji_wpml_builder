@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dji_wpml_builder"
+version = "0.1.0"
+description = "A library to generate DJI WPML KMZ mission files."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "jinja2",
+    "lxml"
+]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"dji_wpml.templates" = ["*.xml"]
