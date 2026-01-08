@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:wpml="http://www.dji.com/wpmz/1.0.6">
+  <Document>
+    <wpml:author>{{ author }}</wpml:author>
+    <wpml:createTime>{{ create_time }}</wpml:createTime>
+    <wpml:updateTime>{{ update_time }}</wpml:updateTime>
+    <wpml:missionConfig>
+      <wpml:flyToWaylineMode>safely</wpml:flyToWaylineMode>
+      <wpml:finishAction>{{ finish_action }}</wpml:finishAction>
+      <wpml:exitOnRCLost>executeLostAction</wpml:exitOnRCLost>
+      <wpml:executeRCLostAction>goBack</wpml:executeRCLostAction>
+
+      <wpml:takeOffSecurityHeight>{{ take_off_security_height }}</wpml:takeOffSecurityHeight>
+      <wpml:globalTransitionalSpeed>{{ global_transitional_speed }}</wpml:globalTransitionalSpeed>
+
+      <!-- <wpml:takeOffRefPoint>0,0,0</wpml:takeOffRefPoint> -->
+      <!-- <wpml:takeOffRefPointAGLHeight>60</wpml:takeOffRefPointAGLHeight> -->
+
+      <wpml:droneInfo>
+        <wpml:droneEnumValue>{{ drone_enum_value }}</wpml:droneEnumValue>
+        <wpml:droneSubEnumValue>{{ drone_sub_enum_value }}</wpml:droneSubEnumValue>
+      </wpml:droneInfo>
+      <wpml:payloadInfo>
+        <wpml:payloadEnumValue>{{ payload_enum_value }}</wpml:payloadEnumValue>
+        <wpml:payloadPositionIndex>{{ payload_position_index }}</wpml:payloadPositionIndex>
+      </wpml:payloadInfo>
+    </wpml:missionConfig>
+    <Folder>
+      <wpml:templateType>waypoint</wpml:templateType>
+      <wpml:templateId>0</wpml:templateId>
+      <wpml:waylineCoordinateSysParam>
+        <wpml:coordinateMode>WGS84</wpml:coordinateMode>
+        <wpml:heightMode>{{ altitude_mode }}</wpml:heightMode>
+      </wpml:waylineCoordinateSysParam>
+      <wpml:autoFlightSpeed>{{
+      global_speed }}</wpml:autoFlightSpeed> {% for wp in waypoints %} <Placemark>
+        <Point>
+          <coordinates>{{ wp.lon }},{{ wp.lat }}</coordinates>
+        </Point>
+        <wpml:index>{{
+      loop.index0 }}</wpml:index>
+        <wpml:ellipsoidHeight>{{ wp.height }}</wpml:ellipsoidHeight>
+        <wpml:height>{{
+      wp.height }}</wpml:height>
+        <wpml:waypointSpeed>{{ wp.speed or global_speed }}</wpml:waypointSpeed>
+        <wpml:waypointTurnParam>
+          <wpml:waypointTurnMode>{{ wp.turn_mode }}</wpml:waypointTurnMode>
+          <wpml:waypointTurnDampingDist>{{ wp.turn_radius }}</wpml:waypointTurnDampingDist>
+        </wpml:waypointTurnParam>
+        <wpml:useGlobalHeight>
+      1</wpml:useGlobalHeight>
+        <wpml:useGlobalSpeed>1</wpml:useGlobalSpeed>
+        <wpml:useGlobalHeadingParam>
+      1</wpml:useGlobalHeadingParam>
+        <wpml:useGlobalTurnParam>1</wpml:useGlobalTurnParam>
+        <wpml:useStraightLine>
+      1</wpml:useStraightLine> {% if wp.actions %} <wpml:actionGroup>
+          <wpml:actionGroupId>{{ loop.index0 }}</wpml:actionGroupId>
+          <wpml:actionGroupStartIndex>{{
+      loop.index0 }}</wpml:actionGroupStartIndex>
+          <wpml:actionGroupEndIndex>{{ loop.index0 }}</wpml:actionGroupEndIndex>
+          <wpml:actionGroupMode>
+      sequence</wpml:actionGroupMode>
+          <wpml:actionTrigger>
+            <wpml:actionTriggerType>reachPoint</wpml:actionTriggerType>
+          </wpml:actionTrigger>
+      {% for action in wp.actions %} <wpml:action>
+            <wpml:actionId>{{ loop.index0 }}</wpml:actionId>
+            <wpml:actionActuatorFunc>{{ action.type }}</wpml:actionActuatorFunc>
+            <wpml:actionActuatorFuncParam> {% if action.type == "orientedShoot" %} <wpml:gimbalPitchRotateAngle>{{
+      action.params.pitch }}</wpml:gimbalPitchRotateAngle>
+              <wpml:actionUUID>{{ action.params.uuid }}</wpml:actionUUID>
+              <wpml:orientedCameraType>
+      99</wpml:orientedCameraType>
+              <wpml:orientedPhotoMode>normalPhoto</wpml:orientedPhotoMode> {%
+      elif action.type == "gimbalRotate" %} <wpml:gimbalPitchRotateAngle>{{ action.params.pitch }}</wpml:gimbalPitchRotateAngle>
+              <wpml:gimbalRotateMode>
+      absoluteAngle</wpml:gimbalRotateMode> {% endif %} </wpml:actionActuatorFuncParam>
+          </wpml:action>
+      {% endfor %} </wpml:actionGroup> {% endif %} <wpml:isRisky>0</wpml:isRisky>
+      </Placemark>
+      {% endfor %} <wpml:payloadParam>
+        <wpml:payloadPositionIndex>0</wpml:payloadPositionIndex>
+        <wpml:imageFormat>visable,ir</wpml:imageFormat>
+      </wpml:payloadParam>
+    </Folder>
+  </Document>
+</kml>
