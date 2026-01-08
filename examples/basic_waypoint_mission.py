@@ -8,7 +8,7 @@ from dji_wpml.enums import DroneModel
 def generate_example_mission(file_name):
     # 1. Initialize the Mission Configuration
     config = MissionConfig(
-        mission_name="Uali Thermal Survey",
+        mission_name="Survey",
         author="Juan",
         create_time=int(datetime.now().timestamp() * 1000), 
         update_time=int(datetime.now().timestamp() * 1000),
