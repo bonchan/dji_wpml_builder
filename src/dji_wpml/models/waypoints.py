@@ -3,9 +3,9 @@ from typing import List, Optional, Dict, Any
 
 @dataclass
 class Waypoint:
-    lat: float
-    lon: float
-    height: float
+    lat: float = None
+    lon: float = None
+    height: float = None
     speed: Optional[float] = None
     heading: int = 0
     turn_mode: str = "toPointAndStopWithDiscontinuityCurvature"

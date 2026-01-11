@@ -2,10 +2,11 @@ import zipfile
 import os
 from pathlib import Path
 from .utils.xml_builder import build_template_xml, build_waylines_xml
+from dji_wpml.models.mission_information import MissionInformation
 
 class KMZGenerator:
-    def __init__(self, mission_config):
-        self.config = mission_config
+    def __init__(self, mission_information: MissionInformation):
+        self.mission_information = mission_information
 
     def build(self, output_filename: str, output_dir: str = ".", verify: bool = False, unzip: bool = False):
         """
@@ -21,8 +22,8 @@ class KMZGenerator:
         full_path = target_dir / output_filename
 
         # 2. Generate XMLs
-        template_xml = build_template_xml(self.config)
-        waylines_xml = build_waylines_xml(self.config)
+        template_xml = build_template_xml(self.mission_information)
+        waylines_xml = build_waylines_xml(self.mission_information)
         
         # 3. Create the KMZ
         with zipfile.ZipFile(full_path, 'w', zipfile.ZIP_DEFLATED) as kmz:

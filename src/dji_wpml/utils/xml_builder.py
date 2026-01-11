@@ -1,4 +1,6 @@
 from jinja2 import Environment, PackageLoader, select_autoescape
+from dji_wpml.models.mission_information import MissionInformation
+
 
 # Initialize the environment
 env = Environment(
@@ -9,35 +11,22 @@ env = Environment(
     lstrip_blocks=True
 )
 
-def build_template_xml(config):
+def build_template_xml(mission_information: MissionInformation):
     template = env.get_template("template_kml.xml")
     return template.render(
-        author=config.author,
-        create_time=config.create_time,
-        update_time=config.update_time,
-        finish_action=config.finish_action,
-        take_off_security_height=config.take_off_security_height,
-        global_transitional_speed=config.global_transitional_speed,
-        drone_enum_value=config.drone_enum_value,
-        drone_sub_enum_value=config.drone_sub_enum_value,
-        payload_enum_value=config.payload_enum_value,
-        payload_position_index=config.payload_position_index,
-        altitude_mode=config.altitude_mode,
-        waypoints=config.waypoints
+        author=mission_information.author,
+        create_time=mission_information.create_time,
+        update_time=mission_information.update_time,
+        mission_config=mission_information.mission_config,
+        template_info=mission_information.template_information 
     )
 
-def build_waylines_xml(config):
+def build_waylines_xml(mission_information: MissionInformation):
     template = env.get_template("waylines_wpml.xml")
     return template.render(
-        author=config.author,
-        create_time=config.create_time,
-        update_time=config.update_time,
-        finish_action=config.finish_action,
-        take_off_security_height=config.take_off_security_height,
-        global_transitional_speed=config.global_transitional_speed,
-        drone_enum_value=config.drone_enum_value,
-        drone_sub_enum_value=config.drone_sub_enum_value,
-        payload_enum_value=config.payload_enum_value,
-        altitude_mode=config.altitude_mode,
-        waypoints=config.waypoints
+        author=mission_information.author,
+        create_time=mission_information.create_time,
+        update_time=mission_information.update_time,
+        mission_config=mission_information.mission_config,
+        waylines_info=mission_information.waylines_information
     )
