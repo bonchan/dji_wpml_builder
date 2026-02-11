@@ -75,6 +75,17 @@
                 <wpml:gimbalRotateMode>{{ action.action_actuator_func_param.gimbal_rotate_mode }}</wpml:gimbalRotateMode>
                 <wpml:gimbalPitchRotateEnable>{{ action.action_actuator_func_param.gimbal_pitch_rotate_enable }}</wpml:gimbalPitchRotateEnable>
                 <wpml:gimbalPitchRotateAngle>{{ action.action_actuator_func_param.gimbal_pitch_rotate_angle }}</wpml:gimbalPitchRotateAngle>
+
+                {% elif action.action_actuator_func.value == "rotateYaw" %}
+                <wpml:aircraftHeading>{{ action.action_actuator_func_param.aircraft_heading }}</wpml:aircraftHeading>
+                <wpml:aircraftPathMode>{{ action.action_actuator_func_param.aircraft_path_mode }}</wpml:aircraftPathMode>
+                
+                {% elif action.action_actuator_func.value == "takePhoto" %}
+                <wpml:payloadPositionIndex>{{ action.action_actuator_func_param.payload_position_index }}</wpml:payloadPositionIndex>
+
+                {% elif action.action_actuator_func.value == "zoom" %}
+                <wpml:payloadPositionIndex>{{ action.action_actuator_func_param.payload_position_index }}</wpml:payloadPositionIndex>
+                <wpml:focalLength>{{ action.action_actuator_func_param.focal_length }}</wpml:focalLength>
                 
                 {% endif %}
                 

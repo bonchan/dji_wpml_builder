@@ -54,7 +54,7 @@
           <wpml:waypointTurnMode>toPointAndStopWithDiscontinuityCurvature</wpml:waypointTurnMode>
           <wpml:waypointTurnDampingDist>{{ wp.waypoint_turn_param }}</wpml:waypointTurnDampingDist>
         </wpml:waypointTurnParam>
-        <wpml:useGlobalHeight>1</wpml:useGlobalHeight>
+        <wpml:useGlobalHeight>0</wpml:useGlobalHeight>
         <wpml:useGlobalSpeed>1</wpml:useGlobalSpeed>
         <wpml:useGlobalHeadingParam>1</wpml:useGlobalHeadingParam>
         <wpml:useGlobalTurnParam>1</wpml:useGlobalTurnParam>
@@ -95,6 +95,10 @@
                 
                 {% elif action.action_actuator_func.value == "takePhoto" %}
                 <wpml:payloadPositionIndex>{{ action.action_actuator_func_param.payload_position_index }}</wpml:payloadPositionIndex>
+
+                {% elif action.action_actuator_func.value == "zoom" %}
+                <wpml:payloadPositionIndex>{{ action.action_actuator_func_param.payload_position_index }}</wpml:payloadPositionIndex>
+                <wpml:focalLength>{{ action.action_actuator_func_param.focal_length }}</wpml:focalLength>
                 
                 {% endif %}
                 
