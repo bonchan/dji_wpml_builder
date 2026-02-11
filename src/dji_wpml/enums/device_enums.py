@@ -55,7 +55,7 @@ class DeviceTypeEnum(Enum):
     M4E = 99        # DJI Matrice 4 Series (E)
     M4T = 99        # DJI Matrice 4 Series (T)
     M4D = 100       # Matrice 4D
-    M4TD = 101      # Matrice 4TD
+    M4TD = 100      # Matrice 4TD
     M4E_CAMERA = 99 # Payload ID for M4 series
     M4T_CAMERA = 99 # Payload ID for M4 series
     M4D_CAMERA = 98
