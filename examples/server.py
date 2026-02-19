@@ -123,7 +123,7 @@ def generate_mission():
                     param_obj = None
                     payload_position_index=params.get('payloadPositionIndex', 0)
 
-                    payload_lens = params.get('payloadLens', 'zoom,ir')
+                    payload_lens = params.get('payloadLens', 'visable,ir')
                     valid_image_format_values = {f.value for f in ImageFormat}
                     image_format_values = [val.strip() for val in payload_lens.split(",") if val.strip() in valid_image_format_values]
 

@@ -49,7 +49,7 @@ class ImageFormat(Enum):
     ZOOM = "zoom"
     IR = "ir"
     NARROW_BAND = "narrow_band"
-    VISIBLE = "visible"
+    VISIBLE = "visable"
 
 class ScanningMode(Enum):
     REPETITIVE = "repetitive"
