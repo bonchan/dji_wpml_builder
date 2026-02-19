@@ -95,6 +95,9 @@
                 
                 {% elif action.action_actuator_func.value == "takePhoto" %}
                 <wpml:payloadPositionIndex>{{ action.action_actuator_func_param.payload_position_index }}</wpml:payloadPositionIndex>
+                <wpml:fileSuffix>{{ action.action_actuator_func_param.file_suffix }}</wpml:fileSuffix>
+                <wpml:payloadLensIndex>{{ action.action_actuator_func_param.payload_lens_index }}</wpml:payloadLensIndex>
+                <wpml:useGlobalPayloadLensIndex>{{ action.action_actuator_func_param.use_global_payload_lens_index }}</wpml:useGlobalPayloadLensIndex>
 
                 {% elif action.action_actuator_func.value == "zoom" %}
                 <wpml:payloadPositionIndex>{{ action.action_actuator_func_param.payload_position_index }}</wpml:payloadPositionIndex>

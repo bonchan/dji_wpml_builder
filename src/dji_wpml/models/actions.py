@@ -11,7 +11,7 @@ class ActionActuatorFuncParam:
 class TakePhoto(ActionActuatorFuncParam):
     payload_position_index: int
     file_suffix: str
-    payload_lens_index: ImageFormat # Storage type of photo
+    payload_lens_index: str # ImageFormat: Storage type of photo
     use_global_payload_lens_index: bool
 
 @dataclass

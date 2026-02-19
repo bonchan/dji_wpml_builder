@@ -123,13 +123,17 @@ def generate_mission():
                     param_obj = None
                     payload_position_index=params.get('payloadPositionIndex', 0)
 
+                    payload_lens = params.get('payloadLens', 'zoom,ir')
+                    valid_image_format_values = {f.value for f in ImageFormat}
+                    image_format_values = [val.strip() for val in payload_lens.split(",") if val.strip() in valid_image_format_values]
+
                     # --- ACTION FACTORY SWITCH ---
                     if act_func_enum == ActionActuatorFunc.TAKE_PHOTO:
                         param_obj = TakePhoto(
                             payload_position_index=payload_position_index,
                             file_suffix = None,
-                            payload_lens_index = [ImageFormat.ZOOM.value],
-                            use_global_payload_lens_index=params.get('useGlobalPayloadLensIndex', 1)
+                            payload_lens_index = ",".join(image_format_values),
+                            use_global_payload_lens_index=params.get('useGlobalPayloadLensIndex', 0)
                         )
                     elif act_func_enum == ActionActuatorFunc.START_RECORD:
                         param_obj = StartRecord(
@@ -143,7 +147,7 @@ def generate_mission():
                         param_obj = Focus(
                             payload_position_index=payload_position_index,
                             payload_lens_index = [ImageFormat.ZOOM.value],
-                            use_global_payload_lens_index=params.get('useGlobalPayloadLensIndex', 1),
+                            use_global_payload_lens_index=params.get('useGlobalPayloadLensIndex', 0),
                             pano_shot_sub_mode = None
                         )
                     elif act_func_enum == ActionActuatorFunc.ZOOM:
